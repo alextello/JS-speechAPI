@@ -105,6 +105,11 @@ function speakText(text) {
     speechSynthesis.speak(message);
 }
 
+// configurar voz
+function setVoice(e) {
+    message.voice = voices.find(voice => voice.name === e.target.value);
+}
+
 // voz cambioa
 speechSynthesis.addEventListener('voiceschanged', getVoices);
 
@@ -118,4 +123,12 @@ closeBtn.addEventListener('click', () => {
     document.getElementById('text-box').classList.remove('show');
 });
 
+// cambio de voz
+voicesSelect.addEventListener('change', setVoice);
+
+// leer texto
+readBtn.addEventListener('click', () => {
+    setTextMessage(textArea.value);
+    speakText();
+});
 getVoices();
