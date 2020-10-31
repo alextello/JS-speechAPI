@@ -70,3 +70,31 @@ function createBox(item) {
     // @todo -evento para hablar
     main.appendChild(box);
 }
+
+// voces
+let voces = [];
+
+function getVoces() {
+    voces = speechSynthesis.getVoices();
+    voces.forEach(voz => {
+        const option = document.createElement('option');
+        option.value = voz.name;
+        option.innerText = `${voz.name} ${voz.lang}`;
+        voicesSelect.appendChild(option);
+    });
+}
+
+// voz cambioa
+speechSynthesis.addEventListener('voiceschanged', getVoces);
+
+// toggle textbox
+toggleBtn.addEventListener('click', () => {
+    document.getElementById('text-box').classList.toggle('show');
+});
+
+// boton cerrar
+closeBtn.addEventListener('click', () => {
+    document.getElementById('text-box').classList.remove('show');
+});
+
+getVoces();
